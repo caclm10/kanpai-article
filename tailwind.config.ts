@@ -27,6 +27,7 @@ const config: Config = {
         },
         gray: {
           DEFAULT: "#C4C4C4",
+          solid: "#939393",
         },
         background: {
           DEFAULT: "#f8fafc"
