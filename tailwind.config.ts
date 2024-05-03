@@ -24,6 +24,9 @@ const config: Config = {
         orange: {
           DEFAULT: "#CF8812",
           foreground: "#f8fafc"
+        },
+        background: {
+          DEFAULT: "#f8fafc"
         }
       },
     },
