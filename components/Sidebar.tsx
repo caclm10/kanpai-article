@@ -6,7 +6,7 @@ import { Button } from "./ui/Button";
 
 const Sidebar = () => {
     return (
-        <aside className="fixed left-0 inset-y-0 bg-background w-[270px]">
+        <aside className="fixed left-0 inset-y-0 bg-background w-[270px] border-r border-r-gray">
             <div className="flex flex-col gap-y-12">
                 <div className="px-12 pt-7">
                     <Button size="icon-sm" className="rounded-full">
