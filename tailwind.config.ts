@@ -25,6 +25,9 @@ const config: Config = {
           DEFAULT: "#CF8812",
           foreground: "#f8fafc"
         },
+        gray: {
+          DEFAULT: "#C4C4C4",
+        },
         background: {
           DEFAULT: "#f8fafc"
         }
