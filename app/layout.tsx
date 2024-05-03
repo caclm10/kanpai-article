@@ -27,7 +27,9 @@ export default function RootLayout({
                 <div className="flex flex-grow">
                     <div className="w-[270px]"></div>
 
-                    <div className="flex-grow">{children}</div>
+                    <div className="flex-grow flex flex-col gap-5">
+                        {children}
+                    </div>
                 </div>
             </body>
         </html>
