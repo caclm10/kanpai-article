@@ -1,6 +1,7 @@
+import Link from "next/link";
 import IconDelete from "./icons/IconDelete";
 import IconEdit from "./icons/IconEdit";
-import { Button } from "./ui/Button";
+import { Button, buttonVariants } from "./ui/Button";
 import {
     Table,
     TableBody,
@@ -23,7 +24,7 @@ const ArticlesTable = () => {
             </TableHeader>
 
             <TableBody>
-                {[...Array(10)].map((i) => (
+                {Array.from(Array(10).keys()).map((i) => (
                     <TableRow key={i}>
                         <TableCell>06 Mar 2023</TableCell>
                         <TableCell>Lorem Ipsum</TableCell>
@@ -38,13 +39,16 @@ const ArticlesTable = () => {
                         </TableCell>
                         <TableCell>
                             <div className="flex justify-center items-center gap-1.5">
-                                <Button
-                                    variant="orange"
-                                    size="icon-sm"
-                                    className="rounded-full"
+                                <Link
+                                    href={`/${i + 1}/edit`}
+                                    className={buttonVariants({
+                                        variant: "orange",
+                                        size: "icon-sm",
+                                        className: "rounded-full",
+                                    })}
                                 >
                                     <IconEdit className="size-4" />
-                                </Button>
+                                </Link>
                                 <Button
                                     variant="red"
                                     size="icon-sm"
