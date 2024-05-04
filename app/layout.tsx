@@ -24,12 +24,10 @@ export default function RootLayout({
                 className={`flex min-h-screen bg-background font-sans antialiased ${fontSans.variable}`}
             >
                 <Sidebar />
-                <div className="flex flex-grow">
-                    <div className="w-[270px]"></div>
+                <div className="flex-grow grid grid-cols-[270px_1fr]">
+                    <div className=""></div>
 
-                    <div className="flex-grow flex flex-col gap-5 max-w-[calc(100vw-270px)]">
-                        {children}
-                    </div>
+                    <div className="flex flex-col gap-5">{children}</div>
                 </div>
             </body>
         </html>
