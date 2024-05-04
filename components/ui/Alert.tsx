@@ -1,7 +1,7 @@
-import * as React from "react";
 import { tv, type VariantProps } from "tailwind-variants";
 import IconCheckCircle from "../icons/IconCheckCircle";
 import IconAlertCircle from "../icons/IconAlertCircle";
+import { forwardRef } from "react";
 
 export const alertVariants = tv({
     slots: {
@@ -39,7 +39,7 @@ export interface AlertProps
     description?: string;
 }
 
-export const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
+export const Alert = forwardRef<HTMLDivElement, AlertProps>(
     ({ title, description, className, variant, ...props }, ref) => {
         const {
             root,

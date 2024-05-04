@@ -1,8 +1,8 @@
 "use client";
 
-import { tv } from "tailwind-variants";
-import { createPortal } from "react-dom";
 import { SVGProps, useEffect, useState } from "react";
+import { createPortal } from "react-dom";
+import { tv } from "tailwind-variants";
 
 export const alertDialogVariant = tv({
     slots: {

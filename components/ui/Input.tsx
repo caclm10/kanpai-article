@@ -1,4 +1,4 @@
-import { HTMLAttributes, forwardRef } from "react";
+import { forwardRef, type HTMLAttributes } from "react";
 import { tv } from "tailwind-variants";
 
 export const inputVariants = tv({

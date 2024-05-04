@@ -1,3 +1,4 @@
+import type { HTMLAttributes, TdHTMLAttributes, ThHTMLAttributes } from "react";
 import { forwardRef } from "react";
 import { tv } from "tailwind-variants";
 
@@ -23,7 +24,7 @@ const { wrapper, root, header, body, row, head, cell } = tableVariants();
 
 export const Table = forwardRef<
     HTMLTableElement,
-    React.HTMLAttributes<HTMLTableElement>
+    HTMLAttributes<HTMLTableElement>
 >(({ className, ...props }, ref) => (
     <div className={wrapper()}>
         <table ref={ref} className={root({ className })} {...props} />
@@ -32,35 +33,35 @@ export const Table = forwardRef<
 
 export const TableHeader = forwardRef<
     HTMLTableSectionElement,
-    React.HTMLAttributes<HTMLTableSectionElement>
+    HTMLAttributes<HTMLTableSectionElement>
 >(({ className, ...props }, ref) => (
     <thead ref={ref} className={header({ className })} {...props} />
 ));
 
 export const TableBody = forwardRef<
     HTMLTableSectionElement,
-    React.HTMLAttributes<HTMLTableSectionElement>
+    HTMLAttributes<HTMLTableSectionElement>
 >(({ className, ...props }, ref) => (
     <tbody ref={ref} className={body({ className })} {...props} />
 ));
 
 export const TableRow = forwardRef<
     HTMLTableRowElement,
-    React.HTMLAttributes<HTMLTableRowElement>
+    HTMLAttributes<HTMLTableRowElement>
 >(({ className, ...props }, ref) => (
     <tr ref={ref} className={row({ className })} {...props} />
 ));
 
 export const TableHead = forwardRef<
     HTMLTableCellElement,
-    React.ThHTMLAttributes<HTMLTableCellElement>
+    ThHTMLAttributes<HTMLTableCellElement>
 >(({ className, ...props }, ref) => (
     <th ref={ref} className={head({ className })} {...props} />
 ));
 
 export const TableCell = forwardRef<
     HTMLTableCellElement,
-    React.TdHTMLAttributes<HTMLTableCellElement>
+    TdHTMLAttributes<HTMLTableCellElement>
 >(({ className, ...props }, ref) => (
     <td ref={ref} className={cell({ className })} {...props} />
 ));

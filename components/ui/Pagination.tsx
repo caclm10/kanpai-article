@@ -1,6 +1,6 @@
 "use client";
 
-import { Fragment, useState } from "react";
+import { Fragment } from "react";
 import { tv } from "tailwind-variants";
 import IconChevronLeft from "../icons/IconChevronLeft";
 import IconChevronRight from "../icons/IconChevronRight";

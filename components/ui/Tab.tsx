@@ -1,4 +1,4 @@
-import { VariantProps, tv } from "tailwind-variants";
+import { tv, type VariantProps } from "tailwind-variants";
 
 const tabVariants = tv({
     slots: {

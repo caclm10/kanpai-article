@@ -1,11 +1,6 @@
 "use client";
 
-import {
-    FormEvent,
-    FormHTMLAttributes,
-    HTMLAttributes,
-    forwardRef,
-} from "react";
+import { forwardRef, type HTMLAttributes } from "react";
 import { tv } from "tailwind-variants";
 
 export interface FormTitleProps {
