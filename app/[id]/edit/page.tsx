@@ -1,5 +1,10 @@
 import ArticleForm from "@/components/ArticleForm";
 import { Article } from "@/models/article";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Edit Article",
+};
 
 interface Props {
     params: {
