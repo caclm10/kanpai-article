@@ -1,6 +1,6 @@
 import { VariantProps, tv } from "tailwind-variants";
 
-const actionTabVariants = tv({
+const tabVariants = tv({
     slots: {
         root: ["flex items-center gap-3 pb-4"],
         icon: [
@@ -24,13 +24,13 @@ const actionTabVariants = tv({
     },
 });
 
-interface Props extends VariantProps<typeof actionTabVariants> {
+interface Props extends VariantProps<typeof tabVariants> {
     title: string;
     label: string;
 }
 
-const ActionTab: React.FC<Props> = ({ title, label, isActive }) => {
-    const { root, icon: iconVariants } = actionTabVariants({ isActive });
+const Tab: React.FC<Props> = ({ title, label, isActive }) => {
+    const { root, icon: iconVariants } = tabVariants({ isActive });
 
     const icon = (
         <svg
@@ -97,11 +97,11 @@ const ActionTab: React.FC<Props> = ({ title, label, isActive }) => {
             <span className={iconVariants()}>{iconComponent}</span>
 
             <div>
-                <p className="text-sm font-semibold">{title}</p>
-                <p className="text-xs">{label}</p>
+                <p className="text-sm font-semibold capitalize">{title}</p>
+                <p className="text-xs capitalize">{label}</p>
             </div>
         </div>
     );
 };
 
-export default ActionTab;
+export default Tab;

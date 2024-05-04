@@ -2,16 +2,13 @@ import Image from "next/image";
 import IconFlagUnitedKingdom from "./icons/IconFlagUnitedKingdom";
 import IconKeyboardArrowDown from "./icons/IconKeyboardArrowDown";
 import IconNotification from "./icons/IconNotification";
+import HeaderTitle from "./HeaderTitle";
 import avatar from "@/assets/images/avatar.png";
 
-interface Props {
-    title: string;
-}
-
-const Header: React.FC<Props> = ({ title }) => {
+const Header: React.FC = () => {
     return (
         <header className="px-8 py-7 bg-background h-24 flex items-center">
-            <h1 className="text-2xl font-semibold">{title}</h1>
+            <HeaderTitle />
 
             <div className="flex-grow"></div>
 

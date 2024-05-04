@@ -1,14 +1,37 @@
-interface Props {
-    children: React.ReactNode;
-}
+"use client";
 
-const ActionTabs: React.FC<Props> = ({ children }) => {
+import { usePathname } from "next/navigation";
+import Tab from "./ui/Tab";
+import Tabs from "./ui/Tabs";
+
+const ActionTabs = () => {
+    const pathname = usePathname();
+
+    const getInstanceName = () => {
+        if (pathname.startsWith("/")) {
+            return "article";
+        }
+
+        return "";
+    };
+
+    const isForm = pathname.endsWith("add") || pathname.endsWith("edit");
+
+    const instanceName = getInstanceName();
+
     return (
-        <div className="px-8">
-            <div className="border-b border-gray">
-                <div className="grid grid-cols-4">{children}</div>
-            </div>
-        </div>
+        <Tabs>
+            <Tab
+                title={instanceName}
+                label={`List ${instanceName}`}
+                isActive={!isForm}
+            />
+            <Tab
+                title="Add / Edit"
+                label={`Detail ${instanceName}`}
+                isActive={isForm}
+            />
+        </Tabs>
     );
 };
 

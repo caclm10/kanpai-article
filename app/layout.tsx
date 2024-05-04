@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Open_Sans as FontSans } from "next/font/google";
-import "./globals.css";
 import Sidebar from "@/components/Sidebar";
+import Header from "@/components/Header";
+import "./globals.css";
+import ActionTabs from "@/components/ActionTabs";
 
 const fontSans = FontSans({
     subsets: ["latin"],
@@ -27,7 +29,12 @@ export default function RootLayout({
                 <div className="flex-grow grid grid-cols-[270px_1fr]">
                     <div className=""></div>
 
-                    <div className="flex flex-col gap-5">{children}</div>
+                    <div className="flex flex-col gap-5">
+                        <Header />
+
+                        <ActionTabs />
+                        {children}
+                    </div>
                 </div>
             </body>
         </html>
