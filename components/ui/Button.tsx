@@ -18,6 +18,7 @@ export const buttonVariants = tv({
             primary: "bg-primary text-primary-foreground hover:bg-primary/90",
             orange: "bg-orange text-orange-foreground hover:bg-orange/90",
             red: "bg-red text-red-foreground hover:bg-red/90",
+            "ghost-gray": "text-gray-solid hover:bg-gray/30",
         },
         size: {
             sm: "h-9 rounded-md px-3",
