@@ -33,7 +33,12 @@ export default function RootLayout({
                         <Header />
 
                         <ActionTabs />
-                        {children}
+
+                        <div className="px-8">
+                            <div className="flex flex-col gap-5 p-5">
+                                {children}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </body>
