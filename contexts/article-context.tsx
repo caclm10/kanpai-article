@@ -3,15 +3,20 @@
 import { Dispatch, createContext, useContext, useReducer } from "react";
 
 export type ARTICLE_ACTIONTYPE =
-    | { type: "setDeleteId"; payload: number | string }
+    | {
+          type: "setDeleteId";
+          payload: { id: number | string; afterDelete?: () => void };
+      }
     | { type: "removeDeleteId" };
 
 export interface ArticleContextState {
     idToDelete: string | number | null;
+    afterDelete: () => void;
 }
 
 const initialState: ArticleContextState = {
     idToDelete: null,
+    afterDelete: () => {},
 };
 export const ArticleContext = createContext<ArticleContextState>(initialState);
 
@@ -46,12 +51,18 @@ export const articleReducer = (
 ) => {
     switch (action.type) {
         case "setDeleteId":
+            const afterDelete =
+                typeof action.payload.afterDelete === "function"
+                    ? action.payload.afterDelete
+                    : () => {};
             return {
-                idToDelete: action.payload,
+                idToDelete: action.payload.id,
+                afterDelete: afterDelete,
             };
         case "removeDeleteId":
             return {
                 idToDelete: null,
+                afterDelete: () => {},
             };
         default:
             return state;

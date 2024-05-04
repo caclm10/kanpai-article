@@ -57,7 +57,15 @@ const ArticlesTable = () => {
     };
 
     const handleClickDelete = (id: string | number) => () => {
-        dispatch!({ type: "setDeleteId", payload: id });
+        dispatch!({
+            type: "setDeleteId",
+            payload: {
+                id,
+                afterDelete: () => {
+                    getArticles();
+                },
+            },
+        });
     };
 
     useEffect(() => {

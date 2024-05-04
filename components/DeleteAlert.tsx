@@ -10,11 +10,26 @@ import {
 import { Button } from "./ui/Button";
 
 const DeleteAlert = () => {
-    const { idToDelete } = useArticle();
+    const { idToDelete, afterDelete } = useArticle();
     const dispatch = useArticleDispatch();
 
     const handleClose = () => {
         dispatch!({ type: "removeDeleteId" });
+    };
+
+    const handleConfirm = async () => {
+        const cb = afterDelete;
+
+        handleClose();
+
+        await fetch(
+            `${process.env.NEXT_PUBLIC_API_URL}/articles/${idToDelete}`,
+            {
+                method: "DELETE",
+            }
+        );
+
+        cb();
     };
 
     if (!idToDelete) return null;
@@ -38,7 +53,9 @@ const DeleteAlert = () => {
                 >
                     Cancel
                 </Button>
-                <Button variant="red">Delete</Button>
+                <Button variant="red" onClick={handleConfirm}>
+                    Delete
+                </Button>
             </AlertDialogActions>
         </AlertDialog>
     );
