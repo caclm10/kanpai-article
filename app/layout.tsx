@@ -6,6 +6,8 @@ import "./globals.css";
 import ActionTabs from "@/components/ActionTabs";
 import DeleteAlert from "@/components/DeleteAlert";
 import { ArticleProivder } from "@/contexts/article-context";
+import Notification from "@/components/Notification";
+import { NotificationProivder } from "@/contexts/notification-context";
 
 const fontSans = FontSans({
     subsets: ["latin"],
@@ -38,11 +40,15 @@ export default function RootLayout({
 
                         <div className="px-8">
                             <div className="flex flex-col gap-5 p-5">
-                                <ArticleProivder>
-                                    {children}
+                                <NotificationProivder>
+                                    <Notification />
 
-                                    <DeleteAlert />
-                                </ArticleProivder>
+                                    <ArticleProivder>
+                                        {children}
+
+                                        <DeleteAlert />
+                                    </ArticleProivder>
+                                </NotificationProivder>
                             </div>
                         </div>
                     </div>

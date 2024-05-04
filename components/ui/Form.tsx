@@ -8,31 +8,17 @@ import {
 } from "react";
 import { tv } from "tailwind-variants";
 
-export interface FormProps
-    extends Omit<FormHTMLAttributes<HTMLFormElement>, "title"> {
-    title?: string;
+export interface FormTitleProps {
+    text: string;
 }
 
-export const Form = forwardRef<HTMLFormElement, FormProps>(
-    ({ title, onSubmit, ...props }, ref) => {
-        const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-            event.preventDefault();
-            onSubmit?.(event);
-        };
-
-        return (
-            <>
-                {title && (
-                    <h4 className="text-xl font-semibold pb-4 border-b border-b-gray-solid/20">
-                        {title}
-                    </h4>
-                )}
-
-                <form ref={ref} onSubmit={handleSubmit} {...props} />
-            </>
-        );
-    }
-);
+export const FormTitle: React.FC<FormTitleProps> = ({ text }) => {
+    return (
+        <h4 className="text-xl font-semibold pb-4 border-b border-b-gray-solid/20">
+            {text}
+        </h4>
+    );
+};
 
 export const formStackVariants = tv({
     base: "flex flex-col gap-y-4",

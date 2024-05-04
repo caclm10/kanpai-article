@@ -1,8 +1,5 @@
-import DeleteButton from "@/components/DeleteButton";
-import { Button } from "@/components/ui/Button";
-import { Form, FormActions, FormStack } from "@/components/ui/Form";
-import { Input, Textarea } from "@/components/ui/Input";
-import { Label } from "@/components/ui/Label";
+import ArticleForm from "@/components/ArticleForm";
+import { Article } from "@/models/article";
 
 interface Props {
     params: {
@@ -10,28 +7,23 @@ interface Props {
     };
 }
 
-const EditArticle = ({ params }: Props) => {
+const EditArticle = async ({ params }: Props) => {
+    const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/articles/${params.id}`,
+        {
+            cache: "no-store",
+        }
+    );
+
+    const data = (await res.json()).data as Article;
+
     return (
-        <>
-            <Form title={`Edit #${params.id}`}>
-                <FormStack>
-                    <div>
-                        <Label htmlFor="title">Title</Label>
-                        <Input name="title" />
-                    </div>
-
-                    <div>
-                        <Label htmlFor="content">Content</Label>
-                        <Textarea name="content" rows={3} />
-                    </div>
-                </FormStack>
-
-                <FormActions>
-                    <Button>Save</Button>
-                    <DeleteButton id={params.id} />
-                </FormActions>
-            </Form>
-        </>
+        <ArticleForm
+            formTitle={`Edit #${params.id}`}
+            id={data.id}
+            title={data.title}
+            content={data.content}
+        />
     );
 };
 

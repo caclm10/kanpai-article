@@ -1,4 +1,4 @@
-import { forwardRef } from "react";
+import { HTMLAttributes, forwardRef } from "react";
 import { tv } from "tailwind-variants";
 
 export const inputVariants = tv({
@@ -63,3 +63,16 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
         );
     }
 );
+
+interface ErrorMessageProps extends HTMLAttributes<HTMLParagraphElement> {}
+
+const errorMessageVariants = tv({
+    base: ["text-xs text-red mt-0.5"],
+});
+
+export const ErrorMessage: React.FC<ErrorMessageProps> = ({
+    className,
+    ...props
+}) => {
+    return <p className={errorMessageVariants({ className })} {...props} />;
+};
