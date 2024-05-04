@@ -1,7 +1,8 @@
 import ArticlesTable from "@/components/ArticlesTable";
 import SearchInput from "@/components/SearchInput";
 import IconAdd from "@/components/icons/IconAdd";
-import { Button } from "@/components/ui/Button";
+import { buttonVariants } from "@/components/ui/Button";
+import Link from "next/link";
 
 export default function Article() {
     return (
@@ -12,10 +13,13 @@ export default function Article() {
                         <SearchInput />
 
                         <div>
-                            <Button size="sm">
+                            <Link
+                                href="/add"
+                                className={buttonVariants({ size: "sm" })}
+                            >
                                 <IconAdd className="mr-2 size-5" />
                                 Add
-                            </Button>
+                            </Link>
                         </div>
                     </div>
 
