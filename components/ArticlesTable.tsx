@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import IconDelete from "./icons/IconDelete";
 import IconEdit from "./icons/IconEdit";
@@ -10,8 +12,15 @@ import {
     TableHeader,
     TableRow,
 } from "./ui/Table";
+import { useArticleDispatch } from "@/contexts/article-context";
 
 const ArticlesTable = () => {
+    const dispatch = useArticleDispatch();
+
+    const handleClickDelete = (id: string | number) => () => {
+        dispatch!({ type: "setDeleteId", payload: id });
+    };
+
     return (
         <Table>
             <TableHeader>
@@ -53,6 +62,7 @@ const ArticlesTable = () => {
                                     variant="red"
                                     size="icon-sm"
                                     className="rounded-full"
+                                    onClick={handleClickDelete(i + 1)}
                                 >
                                     <IconDelete className="size-4" />
                                 </Button>

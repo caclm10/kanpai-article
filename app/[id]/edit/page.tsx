@@ -1,3 +1,4 @@
+import DeleteButton from "@/components/DeleteButton";
 import { Button } from "@/components/ui/Button";
 import { Form, FormActions, FormStack } from "@/components/ui/Form";
 import { Input, Textarea } from "@/components/ui/Input";
@@ -27,9 +28,7 @@ const EditArticle = ({ params }: Props) => {
 
                 <FormActions>
                     <Button>Save</Button>
-                    <Button type="button" variant="red">
-                        Delete
-                    </Button>
+                    <DeleteButton id={params.id} />
                 </FormActions>
             </Form>
         </>

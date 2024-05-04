@@ -4,6 +4,8 @@ import Sidebar from "@/components/Sidebar";
 import Header from "@/components/Header";
 import "./globals.css";
 import ActionTabs from "@/components/ActionTabs";
+import DeleteAlert from "@/components/DeleteAlert";
+import { ArticleProivder } from "@/contexts/article-context";
 
 const fontSans = FontSans({
     subsets: ["latin"],
@@ -36,7 +38,11 @@ export default function RootLayout({
 
                         <div className="px-8">
                             <div className="flex flex-col gap-5 p-5">
-                                {children}
+                                <ArticleProivder>
+                                    {children}
+
+                                    <DeleteAlert />
+                                </ArticleProivder>
                             </div>
                         </div>
                     </div>

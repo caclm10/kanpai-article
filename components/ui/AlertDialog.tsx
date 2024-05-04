@@ -2,7 +2,7 @@
 
 import { tv } from "tailwind-variants";
 import { createPortal } from "react-dom";
-import React, { SVGProps, useEffect, useState } from "react";
+import { SVGProps, useEffect, useState } from "react";
 
 export const alertDialogVariant = tv({
     slots: {
@@ -14,13 +14,21 @@ export const alertDialogVariant = tv({
 });
 
 export interface AlertDialogProps {
+    onClose?: () => void;
     children?: React.ReactNode;
 }
 
-export const AlertDialog: React.FC<AlertDialogProps> = ({ children }) => {
+export const AlertDialog: React.FC<AlertDialogProps> = ({
+    onClose,
+    children,
+}) => {
     const { root, overlay, content, paper } = alertDialogVariant({});
 
     const [mounted, setMounted] = useState(false);
+
+    const handleClose = () => {
+        onClose?.();
+    };
 
     useEffect(() => {
         document.body.classList.add("overflow-hidden");
@@ -38,7 +46,7 @@ export const AlertDialog: React.FC<AlertDialogProps> = ({ children }) => {
 
     return createPortal(
         <div className={root()}>
-            <div className={overlay()}></div>
+            <div className={overlay()} onClick={handleClose}></div>
 
             <div className={content()}>
                 <div className={paper()}>{children}</div>
