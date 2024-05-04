@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import Logo from "./Logo";
 import IconArticle from "./icons/IconArticle";
 import { Button } from "./ui/Button";
@@ -35,11 +36,14 @@ const Sidebar = () => {
                 </div>
 
                 <nav className="flex flex-col gap-2 px-6">
-                    <a className="inline-flex items-center gap-3 px-6 py-3 relative rounded-sm overflow-hidden bg-primary/5 text-primary font-semibold">
+                    <Link
+                        href="/"
+                        className="inline-flex items-center gap-3 px-6 py-3 relative rounded-sm overflow-hidden bg-primary/5 text-primary font-semibold"
+                    >
                         <div className="absolute w-[3px] bg-primary left-0 inset-y-0"></div>
                         <IconArticle />
                         <span>Article</span>
-                    </a>
+                    </Link>
                 </nav>
             </div>
         </aside>
