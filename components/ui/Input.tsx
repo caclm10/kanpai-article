@@ -32,6 +32,23 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     }
 );
 
+export interface SelectProps
+    extends React.SelectHTMLAttributes<HTMLSelectElement> {}
+
+export const Select = forwardRef<HTMLSelectElement, SelectProps>(
+    ({ className, ...props }, ref) => {
+        return (
+            <select
+                className={inputVariants({
+                    className: [className],
+                })}
+                ref={ref}
+                {...props}
+            />
+        );
+    }
+);
+
 export interface TextareaProps
     extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {}
 

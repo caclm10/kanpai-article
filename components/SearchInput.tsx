@@ -1,4 +1,8 @@
-const SearchInput = () => {
+import type { InputHTMLAttributes } from "react";
+
+interface Props extends InputHTMLAttributes<HTMLInputElement> {}
+
+const SearchInput: React.FC<Props> = (props) => {
     return (
         <div className="flex items-center gap-x-3">
             <svg
@@ -20,6 +24,7 @@ const SearchInput = () => {
                     type="search"
                     className="text-xs leading-none focus:outline-none w-full"
                     placeholder="Type here to search..."
+                    {...props}
                 />
             </div>
         </div>

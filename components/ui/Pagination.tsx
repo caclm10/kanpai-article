@@ -31,7 +31,7 @@ const paginationVariants = tv({
 
 interface PaginationProps {
     total: number;
-    current?: number;
+    currentPage?: number;
     boundaries?: number;
     siblings?: number;
     onPageChange?: (page: number) => void;
@@ -39,14 +39,12 @@ interface PaginationProps {
 
 const Pagination: React.FC<PaginationProps> = ({
     total,
-    current = 1,
+    currentPage = 1,
     boundaries = 1,
     siblings = 1,
     onPageChange,
 }) => {
     const { item } = paginationVariants();
-
-    const [currentPage, setCurrentPage] = useState(current);
 
     const pages = [
         ...(boundaries + 1 >= currentPage - siblings - 1
@@ -79,21 +77,21 @@ const Pagination: React.FC<PaginationProps> = ({
 
     const handleClickItem = (page: number) => () => {
         onPageChange?.(page);
-        setCurrentPage(page);
+        // setCurrentPage(page);
     };
 
     const handleClickNext = () => {
         onPageChange?.(currentPage + 1);
-        setCurrentPage((currentPage) => currentPage + 1);
+        // setCurrentPage((currentPage) => currentPage + 1);
     };
 
     const handleClickPrevious = () => {
         onPageChange?.(currentPage - 1);
-        setCurrentPage((currentPage) => currentPage - 1);
+        // setCurrentPage((currentPage) => currentPage - 1);
     };
 
     return (
-        <div className="flex items-center justify-end gap-3">
+        <div className="flex items-center gap-3">
             <button
                 type="button"
                 className={item()}
