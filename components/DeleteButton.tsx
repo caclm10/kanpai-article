@@ -3,6 +3,7 @@
 import { useArticleDispatch } from "@/contexts/article-context";
 import { Button } from "./ui/Button";
 import { useRouter } from "next/navigation";
+import { useNotificationDispatch } from "@/contexts/notification-context";
 
 interface DeleteButton {
     id: string | number;
@@ -11,6 +12,7 @@ interface DeleteButton {
 const DeleteButton: React.FC<DeleteButton> = ({ id }) => {
     const router = useRouter();
     const dispatch = useArticleDispatch();
+    const dispatchNotif = useNotificationDispatch();
 
     const handleClick = () => {
         dispatch!({
@@ -19,6 +21,17 @@ const DeleteButton: React.FC<DeleteButton> = ({ id }) => {
                 id,
                 afterDelete: () => {
                     router.replace("/");
+
+                    setTimeout(() => {
+                        dispatchNotif!({
+                            type: "set",
+                            payload: {
+                                title: "Success!",
+                                description: "Article deleted successfully.",
+                                variant: "primary",
+                            },
+                        });
+                    }, 100);
                 },
             },
         });

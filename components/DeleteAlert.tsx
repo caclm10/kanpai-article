@@ -22,14 +22,18 @@ const DeleteAlert = () => {
 
         handleClose();
 
-        await fetch(
-            `${process.env.NEXT_PUBLIC_API_URL}/articles/${idToDelete}`,
-            {
-                method: "DELETE",
-            }
-        );
+        try {
+            await fetch(
+                `${process.env.NEXT_PUBLIC_API_URL}/articles/${idToDelete}`,
+                {
+                    method: "DELETE",
+                }
+            );
 
-        cb();
+            cb();
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     if (!idToDelete) return null;

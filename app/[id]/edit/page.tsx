@@ -13,6 +13,7 @@ interface Props {
 }
 
 const EditArticle = async ({ params }: Props) => {
+    let data: Article;
     const res = await fetch(
         `${process.env.NEXT_PUBLIC_API_URL}/articles/${params.id}`,
         {
@@ -20,7 +21,15 @@ const EditArticle = async ({ params }: Props) => {
         }
     );
 
-    const data = (await res.json()).data as Article;
+    if (!res.ok) {
+        return (
+            <p className="text-center italic text-sm text-gray">
+                Article not found
+            </p>
+        );
+    }
+
+    data = (await res.json()).data as Article;
 
     return (
         <ArticleForm

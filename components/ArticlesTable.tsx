@@ -21,9 +21,11 @@ import { type ChangeEvent, useEffect, useState } from "react";
 import { useDebouncedState } from "@/hooks/use-debounced-state";
 import IconLoader from "./icons/IconLoader";
 import { Article } from "@/models/article";
+import { useNotificationDispatch } from "@/contexts/notification-context";
 
 const ArticlesTable = () => {
     const dispatch = useArticleDispatch();
+    const dispatchNotif = useNotificationDispatch();
     const [articles, setArticles] = useState<Article[]>([]);
     const [pageSize, setPageSize] = useState(10);
     const [currentPage, setCurrentPage] = useState(1);
@@ -33,13 +35,17 @@ const ArticlesTable = () => {
 
     const getArticles = async () => {
         setIsProcessing(true);
-        const res = await fetch(
-            `${process.env.NEXT_PUBLIC_API_URL}/articles?page_size=${pageSize}&page=${currentPage}&search=${searchValue}`
-        );
-        const body = await res.json();
+        try {
+            const res = await fetch(
+                `${process.env.NEXT_PUBLIC_API_URL}/articles?page_size=${pageSize}&page=${currentPage}&search=${searchValue}`
+            );
+            const body = await res.json();
 
-        setArticles(body.data.articles);
-        setTotalPage(body.data.page_info.last_page);
+            setArticles(body.data.articles);
+            setTotalPage(body.data.page_info.last_page);
+        } catch (error) {
+            console.log(error);
+        }
         setIsProcessing(false);
     };
 
@@ -63,6 +69,14 @@ const ArticlesTable = () => {
                 id,
                 afterDelete: () => {
                     getArticles();
+                    dispatchNotif!({
+                        type: "set",
+                        payload: {
+                            title: "Success!",
+                            description: "Article deleted successfully.",
+                            variant: "primary",
+                        },
+                    });
                 },
             },
         });
