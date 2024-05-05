@@ -30,8 +30,8 @@ export default function RootLayout({
                 className={`flex min-h-screen bg-background font-sans antialiased ${fontSans.variable}`}
             >
                 <Sidebar />
-                <div className="flex-grow grid grid-cols-[270px_1fr]">
-                    <div className=""></div>
+                <div className="flex-grow md:grid md:grid-cols-[270px_1fr]">
+                    <div className="hidden md:block"></div>
 
                     <div className="flex flex-col gap-5">
                         <Header />

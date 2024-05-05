@@ -12,10 +12,10 @@ const tableVariants = tv({
             "border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted",
         ],
         head: [
-            "h-9 px-4 text-center text-xs align-middle font-semibold text-primary bg-primary-low [&:has([role=checkbox])]:pr-0",
+            "h-9 px-4 text-center text-xs align-middle font-semibold text-primary bg-primary-low border border-gray-solid/30 [&:has([role=checkbox])]:pr-0",
         ],
         cell: [
-            "p-4 text-center text-sm align-middle [&:has([role=checkbox])]:pr-0",
+            "p-4 text-center text-sm align-middle border border-gray-solid/30 [&:has([role=checkbox])]:pr-0",
         ],
     },
 });
