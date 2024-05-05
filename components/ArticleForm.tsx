@@ -5,14 +5,16 @@ import { Label } from "./ui/Label";
 import { ErrorMessage, Input, Textarea } from "./ui/Input";
 import SaveButton from "./SaveButton";
 import { useNotificationDispatch } from "@/contexts/notification-context";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import DeleteButton from "./DeleteButton";
+import { useRouter } from "next/navigation";
+import { revalidateTag } from "next/cache";
+import { Article } from "@/models/article";
+import IconLoader from "./icons/IconLoader";
 
 interface Props {
     formTitle: string;
     id?: number;
-    title?: string;
-    content?: string;
 }
 
 interface FormErrors {
@@ -20,10 +22,42 @@ interface FormErrors {
     content?: string[];
 }
 
-const ArticleForm: React.FC<Props> = ({ formTitle, id, title, content }) => {
+const ArticleForm: React.FC<Props> = ({ formTitle, id }) => {
     const formRef = useRef<HTMLFormElement>(null);
     const dispatchNotif = useNotificationDispatch();
     const [errors, setErrors] = useState<FormErrors>({});
+    const [formData, setFormData] = useState({
+        title: "",
+        content: "",
+    });
+    const [isFetching, setIsFetching] = useState(true);
+    const [isNotFound, setIsNotFound] = useState(false);
+
+    const fetchArticle = async () => {
+        setIsFetching(true);
+        try {
+            const res = await fetch(
+                `${process.env.NEXT_PUBLIC_API_URL}/articles/${id}`
+            );
+
+            const body = await res.json();
+            if (res.ok) {
+                const data = body.data as Article;
+
+                setFormData({
+                    title: data.title,
+                    content: data.content,
+                });
+            } else {
+                console.log(body.meta.message);
+            }
+        } catch (error) {
+            console.log(error);
+            setIsNotFound(true);
+        }
+
+        setIsFetching(false);
+    };
 
     const action = async (formData: FormData) => {
         const res = await fetch(
@@ -55,6 +89,7 @@ const ArticleForm: React.FC<Props> = ({ formTitle, id, title, content }) => {
 
             if (!id) {
                 formRef.current?.reset();
+            } else {
             }
         } else {
             if (res.status === 422) {
@@ -72,6 +107,28 @@ const ArticleForm: React.FC<Props> = ({ formTitle, id, title, content }) => {
         }
     };
 
+    useEffect(() => {
+        if (id) {
+            fetchArticle();
+        }
+    }, [id]);
+
+    if (id && isFetching) {
+        return (
+            <div className="p-5 flex items-center justify-center">
+                <IconLoader className="size-5 animate-spin text-gray" />
+            </div>
+        );
+    }
+
+    if (isNotFound) {
+        return (
+            <p className="text-center italic text-sm text-gray">
+                Article not found
+            </p>
+        );
+    }
+
     return (
         <>
             <FormTitle text={formTitle} />
@@ -82,7 +139,7 @@ const ArticleForm: React.FC<Props> = ({ formTitle, id, title, content }) => {
                         <Label htmlFor="title">Title</Label>
                         <Input
                             name="title"
-                            defaultValue={title}
+                            defaultValue={formData.title}
                             className="max-w-[493px]"
                         />
                         {errors.title && (
@@ -93,7 +150,7 @@ const ArticleForm: React.FC<Props> = ({ formTitle, id, title, content }) => {
                         <Label htmlFor="content">Content</Label>
                         <Textarea
                             name="content"
-                            defaultValue={content}
+                            defaultValue={formData.content}
                             rows={3}
                         />
                         {errors.content && (
